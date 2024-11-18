@@ -1,11 +1,11 @@
 // The base API Management URI
-const baseUri = "<REPLACE WITH YOUR API MANAGEMENT DOMAIN - e.g https://api.codeshed.dev>";
+const baseUri = "https://apidev.hku.hk";
 
 // The Microsoft Entra ID application registration client ID
-const clientId = "<REPLACE WITH YOUR MICROSOFT ENTRA ID APPLICATION ID>";
+const clientId = "6498d2ce-1f05-4193-929c-15c332996e37";
 
 // The Microsoft Entra ID tenant ID
-const tenantId = "<REPLACE WITH YOUR MICROSOFT ENTRA ID TENANT ID>";
+const tenantId = "e80d8e75-52b9-4839-a358-87abb93b3567";
 
 // The scope for the access token request to call the Microsoft Graph API
 // If a refresh token is also required for the application, add "offline_access" to the scope
