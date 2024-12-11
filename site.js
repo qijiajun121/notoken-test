@@ -31,18 +31,24 @@ const callApi = async () => {
     document.getElementById("result").innerText = "Loading...";
 
     // Call the Graph API endpoint
-    await fetch(`${baseUri}/graph/me`, {
-        credentials: "include",
-    })
-        .then(async (response) => {
-            if (response.status === 401) {
-                document.getElementById("result").innerText = "User is not authenticated.";
-            } else {
-                document.getElementById("result").innerText = JSON.stringify(await response.json(), null, 4);
-            }
+    fetch("https://apidev.hku.hk/graph/me", {
+        method: "GET",
+        headers: {
+          "Cookie": "token=xxxx; Path=/; Domain=https://spa-no-token-testing.hku.hk; Max-Age=3600",
+          "Accept": "application/json"
+        }
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
         })
-        .catch((error) => {
-            document.getElementById("result").innerText = error;
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.error("Error:", error);
         });
 };
 
