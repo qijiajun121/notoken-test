@@ -34,7 +34,7 @@ const callApi = async () => {
     fetch("https://apidev.hku.hk/graph/me", {
         method: "GET",
         headers: {
-          "Cookie": "token=xxxx; Path=/; Domain=https://spa-no-token-testing.hku.hk; Max-Age=3600",
+          "Cookie": "token=xxxx; Path=/; Domain=https://.hku.hk; Max-Age=3600",
           "Accept": "application/json"
         }
       })
