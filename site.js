@@ -25,11 +25,12 @@ const logout = () => {
     window.location.href = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/logout?post_logout_redirect_uri=${baseUri}/auth/logout`;
 };
 
+// Calls the graph endpoint and displays the result
 const callApi = async () => {
     // Display loading message
     document.getElementById("result").innerText = "Loading...";
     console.log(document.cookie);
-    
+
     // Call the Graph API endpoint
     fetch("https://apidev.hku.hk/graph/me", {
         method: "GET",
