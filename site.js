@@ -25,17 +25,6 @@ const logout = () => {
     window.location.href = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/logout?post_logout_redirect_uri=${baseUri}/auth/logout`;
 };
 
-function getCookieValue(cookieName) {
-    const cookies = document.cookie.split("; "); // Split cookies into key-value pairs
-    for (const cookie of cookies) {
-      const [name, value] = cookie.split("="); // Split each key-value pair
-      if (name === cookieName) {
-        return value; // Return the value if the name matches
-      }
-    }
-    return null; // Return null if the cookie is not found
-}
-
 // Calls the graph endpoint and displays the result
 const callApi = async () => {
     // Display loading message
@@ -43,24 +32,26 @@ const callApi = async () => {
     console.log(document.cookie);
 
     // Call the Graph API endpoint
-    const token = getCookieValue("token");
-      console.log("Token:", token);
- 
-      // Make an AJAX request using the token
-      $.ajax({
-        url: "https://apidev.hku.hk/graph/me",
+    fetch("https://apidev.hku.hk/graph/me", {
         method: "GET",
         headers: {
-          Cookie: `token=${token}`, // Add the token cookie
-          Accept: "application/json",
+          //"Cookie": "token=xxxx; Path=/; Domain=https://.hku.hk; Max-Age=3600",
+          "Accept": "application/json"
         },
-        success: function (data) {
-          console.log("Response data:", data);
-        },
-        error: function (error) {
+        credentials: "include"
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
           console.error("Error:", error);
-        },
-      });
+        });
 };
 
 // Exports the functions to be used in the HTML
