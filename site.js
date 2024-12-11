@@ -25,6 +25,17 @@ const logout = () => {
     window.location.href = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/logout?post_logout_redirect_uri=${baseUri}/auth/logout`;
 };
 
+function getCookieValue(cookieName) {
+    const cookies = document.cookie.split("; "); // Split cookies into key-value pairs
+    for (const cookie of cookies) {
+      const [name, value] = cookie.split("="); // Split each key-value pair
+      if (name === cookieName) {
+        return value; // Return the value if the name matches
+      }
+    }
+    return null; // Return null if the cookie is not found
+}
+
 // Calls the graph endpoint and displays the result
 const callApi = async () => {
     // Display loading message
