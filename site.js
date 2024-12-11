@@ -30,12 +30,12 @@ const callApi = async () => {
     // Display loading message
     document.getElementById("result").innerText = "Loading...";
     console.log(document.cookie);
-    
+
     // Call the Graph API endpoint
     fetch("https://apidev.hku.hk/graph/me", {
         method: "GET",
         headers: {
-          "Cookie": "token=xxxx; Path=/; Domain=https://.hku.hk; Max-Age=3600",
+          //"Cookie": "token=xxxx; Path=/; Domain=https://.hku.hk; Max-Age=3600",
           "Accept": "application/json"
         },
         credentials: "include"
