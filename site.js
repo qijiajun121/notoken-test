@@ -32,26 +32,24 @@ const callApi = async () => {
     console.log(document.cookie);
 
     // Call the Graph API endpoint
-    fetch("https://apidev.hku.hk/graph/me", {
+    const token = getCookieValue("token");
+      console.log("Token:", token);
+ 
+      // Make an AJAX request using the token
+      $.ajax({
+        url: "https://apidev.hku.hk/graph/me",
         method: "GET",
         headers: {
-          //"Cookie": "token=xxxx; Path=/; Domain=https://.hku.hk; Max-Age=3600",
-          "Accept": "application/json"
+          Cookie: `token=${token}`, // Add the token cookie
+          Accept: "application/json",
         },
-        credentials: "include"
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log(data);
-        })
-        .catch(error => {
+        success: function (data) {
+          console.log("Response data:", data);
+        },
+        error: function (error) {
           console.error("Error:", error);
-        });
+        },
+      });
 };
 
 // Exports the functions to be used in the HTML
